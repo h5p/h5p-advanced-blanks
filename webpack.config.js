@@ -26,20 +26,11 @@ module.exports = (env, argv) => {
           test: /\.tsx?$/,
           use: 'ts-loader',
           exclude: /node_modules/
-        },
-        {
-          test: /\.ractive.html$/,
-          use: {
-            loader: 'html-loader',
-            options: {
-              minimize: false
-            }
-          }
         }
       ]
     },
     resolve: {
-      extensions: [".tsx", ".ts", ".js", ".ractive.html"]
+      extensions: [".tsx", ".ts", ".js"]
     }
   };
 
