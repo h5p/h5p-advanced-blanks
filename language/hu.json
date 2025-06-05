@@ -1,0 +1,294 @@
+{
+  "semantics": [
+    {
+      "label": "Média",
+      "fields": [
+        {
+          "label": "Típus",
+          "description": "Opcionális média a kérdés fölött megjelenítve."
+        },
+        {
+          "label": "Nagyításának letiltása a kérdés képénél"
+        }
+      ]
+    },
+    {
+      "label": "Kitöltendő tartalom",
+      "fields": [
+        {
+          "label": "Feladat leírása",
+          "default": "Írja be a hiányzó szavakat!",
+          "description": "Útmutató, amely megmutatja a felhasználónak, hogyan válaszoljon erre a feladatra."
+        },
+        {
+          "label": "A szöveg a hiányzó részekkel",
+          "important": {
+            "description": "<ul><li>A hiányzó kifejezések helyét __________ jellel kell megjelölni (három vagy több aláhúzásjel).</li><li>Ne írja a megoldásokat a szövegbe!</li></ul>",
+            "example": "_________ Norvégiába akartam látogatni."
+          }
+        },
+        {
+          "label": "A szövegben használt hiányzó részek",
+          "entity": "hiányzó kifejezés",
+          "widgets": [
+            {
+              "label": "Alapértelmezett"
+            }
+          ],
+          "field": {
+            "label": "Hiányzó kifejezés",
+            "fields": [
+              {
+                "label": "Helyes válasz",
+                "description": "A válaszvariációkat perjellel (/) választhatja el."
+              },
+              {
+                "label": "Segítség"
+              },
+              {
+                "label": "Helytelen válaszok",
+                "entity": "helytelen válasz",
+                "field": {
+                  "label": "Helytelen válasz",
+                  "description": "A válaszvariációkat perjellel (/) választhatja el.",
+                  "fields": [
+                    {
+                      "label": "Helytelen válasz szövege"
+                    },
+                    {
+                      "label": "Visszajelzés",
+                      "description": "A visszajelzés célja a felhasználó segítése a helyes válasz megtalálásában, és ideális esetben a felhasználó által megadott téves válaszhoz kell igazodik."
+                    },
+                    {
+                      "label": "Kiemelés alkalmazása a szövegben, amikor a visszajelzés látható",
+                      "description": "Tegyen !! jeleket a szövegrész elé és után, hogy kiemeléssel jelölje azt meg. (Pl. Ez egy !!kiemelés!!)"
+                    },
+                    {
+                      "label": "A kiemelés helye a hiányzó kifejezéshez képest:",
+                      "options": [
+                        {
+                          "label": "- 1 (közvetlenül az üres rész előtt)"
+                        },
+                        {
+                          "label": "- 2 (két kiemeléssel az üres rész előtt)"
+                        },
+                        {
+                          "label": "- 3 (három kiemeléssel az üres rész előtt)"
+                        },
+                        {
+                          "label": "+ 1 (közvetlenül az üres rész után)"
+                        },
+                        {
+                          "label": "+ 2 (két kiemeléssel az üres rész után)"
+                        },
+                        {
+                          "label": "+ 3 (három kiemeléssel az üres rész után)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Kódrészletek",
+      "fields": [
+        {
+          "label": "Kódrészlet lista",
+          "description": "A kódrészletek olyan szövegek, amelyek újra felhasználhatók a visszajelzéses szövegekben a @snippetname beillesztésével.",
+          "entity": "kódrészlet",
+          "field": {
+            "label": "Kódrészlet",
+            "fields": [
+              {
+                "label": "Név",
+                "description": "A kódrészlet nevében csak betűket és számokat használhat."
+              },
+              {
+                "label": "Szöveg"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Globális visszajelzés",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Alapértelmezett"
+            }
+          ],
+          "label": "Egyéni visszajelzés megadása tetszőleges eredmény intervallumokra",
+          "description": "Kattintson az \"Új intervallum\" gombra további intervallumok hozzáadásához. Például: 0-20% Rossz eredmény, 21-91% Átlagos eredmény, 91-100% Kimagasló eredmény!",
+          "entity": "intervallum",
+          "field": {
+            "fields": [
+              {
+                "label": "Eredmény intervallum"
+              },
+              {},
+              {
+                "label": "Visszajelzés az adott eredmény intervallumnál",
+                "placeholder": "Adja meg a visszajelzést"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Viselkedési beállítások",
+      "description": "Ezekkel a beállításokkal szabályozható a feladat viselkedése.",
+      "fields": [
+        {
+          "label": "Válaszadási mód",
+          "description": "Megadja, hogy a felhasználó milyen módon ad választ.",
+          "options": [
+            {
+              "label": "A felhasználók a lehetőségek közül választanak."
+            },
+            {
+              "label": "A felhasználók begépelik a válaszokat."
+            }
+          ]
+        },
+        {
+          "label": "A lehetőségeknél felkínált alternatívák",
+          "options": [
+            {
+              "label": "A hiányzó részhez tartozó helytelen válaszok"
+            },
+            {
+              "label": "Az összes többi hiányzó rész helyes válaszai"
+            }
+          ]
+        },
+        {
+          "label": "A más hiányzó részekből felkínált lehetőségek maximális száma",
+          "description": "Írjon be 0-t, ha nem szeretne korlátot beállítani."
+        },
+        {
+          "label": "Viselkedés, amikor a felhasználó helyesírási hibát vét",
+          "options": [
+            {
+              "label": "Elfogadás helyes válaszként"
+            },
+            {
+              "label": "Figyelmeztetés a hibáról"
+            },
+            {
+              "label": "Vegye azt is hibának"
+            }
+          ]
+        },
+        {
+          "label": "Kis/nagybetű érzékenység",
+          "description": "Bekapcsolása esetén a megoldástól eltérő betűhasználat hibának minősül."
+        },
+        {
+          "label": "Válaszok automatikus ellenőrzése a bevitel után"
+        },
+        {
+          "label": "\"Megoldások mutatása\" gomb engedélyezve"
+        },
+        {
+          "label": "A megoldás megmutatása előtt minden mezőt meg kell válaszolni"
+        },
+        {
+          "label": "\"Újra\" engedélyezve"
+        },
+        {
+          "label": "\"Ellenőrzés\" engedélyezve"
+        },
+        {
+          "label": "Megerősítő ablak megjelenítése \"Ellenőrzés\" esetén"
+        },
+        {
+          "label": "Megerősítő ablak megjelenítése \"Újra\" esetén"
+        }
+      ]
+    },
+    {
+      "label": "\"Megoldások mutatása\" gomb szövege",
+      "default": "Megoldás mutatása"
+    },
+    {
+      "label": "\"Újra\" gomb szövege",
+      "default": "Újra"
+    },
+    {
+      "label": "\"Ellenőrzés\" gomb szövege",
+      "default": "Ellenőrzés"
+    },
+    {
+      "label": "\"Leadás\" gomb szövege",
+      "default": "Leadás"
+    },
+    {
+      "label": "\"Nincs kitöltve\" üzenet szövege",
+      "default": "Kérjük, töltsön ki minden üres mezőt a megoldás megtekintéséhez"
+    },
+    {
+      "label": "Segítség ikon felirata",
+      "default": "Segítség"
+    },
+    {
+      "label": "Helyesírási hiba figyelmeztetés",
+      "description": "Ez az üzenet akkor jelenik meg a felhasználóknak, amikor helyesírási hibát vétenek. Használja az @error kifejezést, hogy rámutasson, mit írtak rosszul.",
+      "default": "Ellenőrizze a helyesírást: @error"
+    },
+    {
+      "label": "Ellenőrzés megerősítő ablaka",
+      "fields": [
+        {
+          "label": "Fejléc szöveg",
+          "default": "Biztosan befejezi?"
+        },
+        {
+          "label": "Törzsszöveg",
+          "default": "Biztos, hogy befejezi a megoldást?"
+        },
+        {
+          "label": "Mégse gomb felirata",
+          "default": "Mégse"
+        },
+        {
+          "label": "Megerősítés gomb felirata",
+          "default": "Befejezés"
+        }
+      ]
+    },
+    {
+      "label": "Újrapróbálkozás megerősítő ablaka",
+      "fields": [
+        {
+          "label": "Fejléc szöveg",
+          "default": "Újra?"
+        },
+        {
+          "label": "Törzsszöveg",
+          "default": "Biztos, hogy újra megpróbálja?"
+        },
+        {
+          "label": "Mégse gomb felirata",
+          "default": "Mégse"
+        },
+        {
+          "label": "Megerősítés gomb felirata",
+          "default": "Újra"
+        }
+      ]
+    },
+    {
+      "label": "A pontszámjelző sáv szöveges megjelenítése a szövegfelolvasót használók számára",
+      "default": "Elért pontszám: :num / :total"
+    }
+  ]
+}
