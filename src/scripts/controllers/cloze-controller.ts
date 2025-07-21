@@ -10,10 +10,9 @@ import { Highlight } from "../models/highlight";
 import { Blank } from "../models/blank";
 import { Correctness } from '../models/answer';
 
-import highlightTemplate from '../views/highlight.ractive.html';
-import blankTemplate from '../views/blank.ractive.html';
-
-import * as RactiveEventsKeys from '../../lib/ractive-events-keys';
+import BlankView from '../views/blank-view';
+import HighlightView from '../views/highlight-view';
+import blankView from '../views/blank-view';
 
 interface ScoreChanged {
   (score: number, maxScore: number): void;
@@ -47,9 +46,8 @@ export class ClozeController {
   public onTyped: Typed;
   public onTextChanged: TextChanged;
 
-  // Storage of the ractive objects that link models and views
-  private highlightRactives: { [id: string]: Ractive.Ractive } = {};
-  private blankRactives: { [id: string]: Ractive.Ractive } = {};
+  private blankViews: { [id: string]: BlankView } = {};
+  private highlightsViews: { [id: string]: HighlightView } = {};
 
   public get maxScore(): number {
     return this.cloze.blanks.length;
@@ -106,7 +104,7 @@ export class ClozeController {
   }
 
   /**
-   * Sets up all blanks, the cloze itself and the ractive bindings.
+   * Sets up all blanks, the cloze itself and the views.
    * @param  {HTMLElement} root
    */
   initialize(root: HTMLElement, jquery: JQuery) {
@@ -114,9 +112,6 @@ export class ClozeController {
     this.isSelectCloze = this.settings.clozeType === ClozeType.Select ? true : false;
 
     var blanks = this.repository.getBlanks();
-
-    // Stop ractive debug mode
-    Ractive.DEBUG = false;
 
     if (this.isSelectCloze && this.settings.selectAlternatives === SelectAlternatives.All) {
       for (var blank of blanks) {
@@ -132,7 +127,7 @@ export class ClozeController {
 
     var containers = this.createAndAddContainers(root);
     containers.cloze.innerHTML = this.cloze.html;
-    this.createRactiveBindings();
+    this.createViews();
   }
 
   checkAll = () => {
@@ -235,48 +230,38 @@ export class ClozeController {
     };
   }
 
-  private createHighlightBinding(highlight: Highlight) {
-    this.highlightRactives[highlight.id] = new Ractive({
-      el: '#container_' + highlight.id,
-      template: highlightTemplate,
-      data: {
-        object: highlight
-      }
-    });
+  private createHighlightView(highlight: Highlight) {
+    const highlightView = new HighlightView(highlight);
+    this.highlightsViews[highlight.id] = highlightView;
+
+    const parent = document.querySelector(`#container_${highlight.id}`);
+    parent?.appendChild(highlightView.getDOM());
   }
 
-  private createBlankBinding(blank: Blank) {
-    var ractive = new Ractive({
-      el: '#container_' + blank.id,
-      template: blankTemplate,
-      data: {
-        isSelectCloze: this.isSelectCloze,
-        blank: blank
-      },
-      events: {
-        enter: RactiveEventsKeys.enter,
-        escape: RactiveEventsKeys.escape,
-        anykey: RactiveEventsKeys.anykey
-      }
+  private createBlankView(blank: Blank) {
+    const blankView = new BlankView(blank, this.isSelectCloze, {
+      requestCloseTooltip: this.requestCloseTooltip,
+      checkBlank: this.checkBlank,
+      textTyped: this.textTyped,
+      focus: this.focus,
+      showHint: this.showHint,
+      displayFeedback: this.displayFeedback,
+      textChanged: this.onTextChanged
     });
-    ractive.on("checkBlank", this.checkBlank);
-    ractive.on("showHint", this.showHint);
-    ractive.on("textTyped", this.textTyped);
-    ractive.on("textChanged", this.onTextChanged);
-    ractive.on("closeMessage", this.requestCloseTooltip);
-    ractive.on("focus", this.focus);
-    ractive.on("displayFeedback", this.displayFeedback);
 
-    this.blankRactives[blank.id] = ractive;
+    this.blankViews[blank.id] = blankView;
+
+    const parent = document.querySelector(`#container_${blank.id}`);
+    parent?.appendChild(blankView.getDOM());
   }
 
-  private createRactiveBindings() {
+  private createViews() {
     for (var highlight of this.cloze.highlights) {
-      this.createHighlightBinding(highlight);
+      this.createHighlightView(highlight);
     }
 
     for (var blank of this.cloze.blanks) {
-      this.createBlankBinding(blank);
+      this.createBlankView(blank);
     }
   }
 
@@ -286,13 +271,13 @@ export class ClozeController {
    */
   private refreshCloze() {
     for (var highlight of this.cloze.highlights) {
-      var highlightRactive = this.highlightRactives[highlight.id];
-      highlightRactive.set("object", highlight);
+      const highlightView = this.highlightsViews[highlight.id];
+      highlightView?.set(highlight);
     }
 
     for (var blank of this.cloze.blanks) {
-      var blankRactive = this.blankRactives[blank.id];
-      blankRactive.set("blank", blank);
+      const blankView = this.blankViews[blank.id];
+      blankView?.set(blank);
     }
   }
 

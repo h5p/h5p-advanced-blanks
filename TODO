@@ -1,7 +1,7 @@
-High priority: 
+High priority:
 ==============
 
-Bugfixes:  
+Bugfixes:
   ☐ library.json: remove "preloadedCss": [ ] (also in Ractive)
   ✔ mode selection allows "-" selector (+ option below) @done(18-06-29 18:13)
   ☐ hide "option restriction setting" when not appropriate (showWhen doesn't work for selectAlternatives for some reason)
@@ -47,17 +47,17 @@ General todo:
         ✔ what we need: fill in answers, but don't check them + getAnswerGiven must be true @done(18-08-04 16:35)
       ✔ "override check button" --> doesn't work as expected @done(18-08-04 14:47)
         ✔ disabled --> should not show check button & give no feedback @done(18-08-04 14:44)
-        ✔ bug: doesn't proceed to next step @done(18-08-04 14:44)        
+        ✔ bug: doesn't proceed to next step @done(18-08-04 14:44)
   ✔ check state storage mechanism: is the current state fully saved & restored? @done(18-08-03 23:30)
   ✔ make sure semantics naming is consistent with other H5P libraries @done(18-07-07 17:59)
   ✔ very long selection / textareas are clipped if they go out of bounds @done(18-06-02 20:58)
-  Firefox 57: 
+  Firefox 57:
     Safari iOS 11 on iPhone and iPad:
       ✘ typing mode: error indicator overlaps with text @cancelled(18-06-29 17:02) not reproducable
       - typing mode: when there's a popup, the reference element should be focused (still needed?)
       ✔ typing mode: the color of correctly solved gaps are wrong (the text is much too light) @done(18-06-29 17:02)
       ✔ typing mode: the alignment of the (in)correct symbol is broken: it's too far up (minor issue) @done(18-06-29 17:02)
-      - typing mode: the cursor is visible on top of popups if they overlap (happens a lot)      
+      - typing mode: the cursor is visible on top of popups if they overlap (happens a lot)
     Chrome / Samsung Internet on Android (Samsung Galaxy S7):
       - typing mode: part of the cursor is visible on top of popups if they overlap (happens a lot, not as ugly as on iOS)
       - clipping of popups (small amount, no content clipped) in certain cases
@@ -68,13 +68,13 @@ General todo:
       - select mode: when selecting an option, all options in the list are displayed with the in/correct style (displayed only for a short time)
     only Edge 41:
       - hover over correct symbol: textbox select cursor displayed (instead of none)
-      - big left margin for select boxes      
-      - typing mode: hint button aligned to the bottom      
+      - big left margin for select boxes
+      - typing mode: hint button aligned to the bottom
     only Internet Explorer 10/11:
       - select mode: UI override of select boxes doesn't work: displays chevron (a problem if there is a hint, because it is on top of the in/correct symbol)
-      - select mode: correct answer: text too light (dark gray), not an issue in typing mode           
+      - select mode: correct answer: text too light (dark gray), not an issue in typing mode
       - typing mode: textbox calculation too small
-          
+
 Medium priority:
 ================
 ☐ add "not-filled out" warning
@@ -121,7 +121,6 @@ Far future:
 ☐ react to resize event + send them when appropriate
 ☐ new setting: allow further editing after 'check' / disallow
 ☐ sanatise all user entered strings
-☐ replace ractive with jquery views
 ☐ add highlight for hints
 ☐ hide tip icon if blank was answered correctly
 ☐ show "check" button in auto-answer mode when last gap is being filled (to avoid confusion of what to do at the end; user might not be aware of the concept of "losing focus")
@@ -143,14 +142,14 @@ done log:
   ✔ select mode --> marking of correct / error not working
   ✘ show +1 / -1 score calculator
   ✔ simplify highlight markup in semantics (for incorrectAnswers)
-  ✔ popup for (i) icon when notifying of surpressed popups?  
+  ✔ popup for (i) icon when notifying of surpressed popups?
   ✔ Alternative markup should be / instead of ; to align the content with the normal h5p content type. @done(17-12-27 21:52)
   ✔ It would be useful to have HTML markup in feedback texts. @done(17-12-31 11:47)
   ✔ The 'case sensitive' option should be off by default. @done(17-12-30 14:07)
     ✔ Answer mode should become a regular option. @done(17-12-30 14:07)
   ✔ Line height should not be 1.0. The touching boxes look bad. @done(17-12-31 11:20)
   ✔ was not/wasn't --> only was not is accepted as solution (it's not an issue with alternatives, though. It's must be about the apostrophe.) @done(17-12-27 21:52)
-  ✔ trim whitespaces of user input  
+  ✔ trim whitespaces of user input
   ✘ select box / input box not long enough for long input --> overlap with symbols @cancelled(17-12-31 11:51)
   ✘ requires an estimate of width by text length (should be implemented in an isolated way) @cancelled(17-12-31 11:51)
   ✔ hide message surpression indicator when clicking retry
