@@ -87,9 +87,9 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
     /**
     * Overrides the attach method of the superclass (H5P.Question) and calls it
     * at the same time. (equivalent to super.attach($container)).
-    * This is necessary, as Ractive needs to be initialized with an existing DOM
+    * This was necessary, as Ractive needs to be initialized with an existing DOM
     * element. DOM elements are created in H5P.Question.attach, so initializing
-    * Ractive in registerDomElements doesn't work.
+    * Ractive in registerDomElements doesn't work. Can probably be changed now
     */
     this.attach = ((original) => {
       return ($container) => {

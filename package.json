@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "test": "npx ava",
-    "build": "webpack --mode=development && cp node_modules/ractive/ractive.min.js ./dist",
-    "watch": "webpack --watch --mode=development"
+    "build": "webpack --mode=production",
+    "watch": "webpack --mode=development --watch"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,6 @@
     "@babel/preset-env": "^7.18.10",
     "@types/diff": "^5.0.3",
     "@types/jquery": "^3.5.16",
-    "@types/ractive": "^0.7.27",
     "autoprefixer": "^10.4.14",
     "ava": "^4.3.3",
     "babel-loader": "^8.2.5",
@@ -40,8 +39,5 @@
     "typescript": "^5.0.4",
     "webpack": "^5.94.0",
     "webpack-cli": "^4.10.0"
-  },
-  "dependencies": {
-    "ractive": "^1.4.2"
   }
 }
