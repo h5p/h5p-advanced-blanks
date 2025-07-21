@@ -1,0 +1,294 @@
+{
+"semantics": [
+    {
+      "label": "Media",
+      "fields": [
+        {
+          "label": "Tip",
+          "description": "Conținut media opțional de afișat deasupra întrebării."
+        },
+        {
+          "label": "Dezactivează zoom-ul pentru imaginea întrebării"
+        }
+      ]
+    },
+    {
+      "label": "Conținut de completat",
+      "fields": [
+        {
+          "label": "Descrierea sarcinii",
+          "default": "Completați cuvintele lipsă.",
+          "description": "Un ghid care îi spune utilizatorului cum să rezolve această sarcină."
+        },
+        {
+          "label": "Text cu spații goale",
+          "important": {
+            "description": "<ul><li>Spațiile goale trebuie marcate cu __________ (trei sau mai multe caractere underscore).</li><li>Nu introduceți soluțiile în text.</li></ul>",
+            "example": "Am vrut _________ să vizitez Norvegia."
+          }
+        },
+        {
+          "label": "Spații goale utilizate în text",
+          "entity": "spațiu gol",
+          "widgets": [
+            {
+              "label": "Implicit"
+            }
+          ],
+          "field": {
+            "label": "Spațiu gol",
+            "fields": [
+              {
+                "label": "Răspuns corect",
+                "description": "Puteți separa răspunsurile alternative cu o bară oblică (/)."
+              },
+              {
+                "label": "Indiciu"
+              },
+              {
+                "label": "Răspunsuri incorecte",
+                "entity": "răspuns incorect",
+                "field": {
+                  "label": "Răspuns incorect",
+                  "description": "Puteți separa răspunsurile alternative cu o bară oblică (/)",
+                  "fields": [
+                    {
+                      "label": "Textul răspunsului incorect"
+                    },
+                    {
+                      "label": "Feedback",
+                      "description": "Feedback-ul ar trebui să ajute utilizatorul să găsească răspunsul corect și, în mod ideal, să fie personalizat în funcție de răspunsul introdus de utilizator."
+                    },
+                    {
+                      "label": "Afișează evidențierea în text când este afișat feedback-ul",
+                      "description": "Puneți !! înainte și după o bucată de text pentru a o marca drept evidențiere. (ex. Aceasta este !!o evidențiere!!)"
+                    },
+                    {
+                      "label": "Poziția evidențierii față de spațiul gol:",
+                      "options": [
+                        {
+                          "label": "- 1 (imediat înainte de spațiul gol)"
+                        },
+                        {
+                          "label": "- 2 (două evidențieri înainte de spațiul gol)"
+                        },
+                        {
+                          "label": "- 3 (trei evidențieri înainte de spațiul gol)"
+                        },
+                        {
+                          "label": "+ 1 (imediat după spațiul gol)"
+                        },
+                        {
+                          "label": "+ 2 (două evidențieri după spațiul gol)"
+                        },
+                        {
+                          "label": "+ 3 (trei evidențieri după spațiul gol)"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Fragmente de text (Snippets)",
+      "fields": [
+        {
+          "label": "Listă de fragmente",
+          "description": "Fragmentele sunt texte care pot fi reutilizate în textele de feedback prin inserarea @numefragment în acestea.",
+          "entity": "fragment",
+          "field": {
+            "label": "Fragment",
+            "fields": [
+              {
+                "label": "Nume",
+                "description": "Puteți folosi doar litere și cifre pentru numele fragmentului."
+              },
+              {
+                "label": "Text"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Feedback general",
+      "fields": [
+        {
+          "widgets": [
+            {
+              "label": "Implicit"
+            }
+          ],
+          "label": "Definiți feedback personalizat pentru orice interval de scor",
+          "description": "Faceți clic pe butonul \"Adaugă interval\" pentru a adăuga oricâte intervale aveți nevoie. Exemplu: 0-20% Scor slab, 21-91% Scor mediu, 91-100% Scor excelent!",
+          "entity": "interval",
+          "field": {
+            "fields": [
+              {
+                "label": "Interval de scor"
+              },
+              {},
+              {
+                "label": "Feedback pentru intervalul de scor definit",
+                "placeholder": "Completați feedback-ul"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "label": "Setări de comportament",
+      "description": "Aceste opțiuni vă vor permite să controlați cum se comportă sarcina.",
+      "fields": [
+        {
+          "label": "Mod de răspuns",
+          "description": "Indică modul în care utilizatorul oferă răspunsuri.",
+          "options": [
+            {
+              "label": "Utilizatorul selectează din opțiuni."
+            },
+            {
+              "label": "Utilizatorul introduce răspunsurile de la tastatură."
+            }
+          ]
+        },
+        {
+          "label": "Alternative oferite pentru selecție",
+          "options": [
+            {
+              "label": "Răspunsurile incorecte introduse pentru spațiul gol"
+            },
+            {
+              "label": "Răspunsurile corecte ale tuturor celorlalte spații goale"
+            }
+          ]
+        },
+        {
+          "label": "Numărul maxim de alternative din alte spații goale oferite pentru selecție",
+          "description": "Introduceți 0 pentru a nu seta nicio limită."
+        },
+        {
+          "label": "Comportament la greșeli de ortografie",
+          "options": [
+            {
+              "label": "Acceptă-l ca răspuns corect"
+            },
+            {
+              "label": "Avertizează utilizatorul despre greșeală"
+            },
+            {
+              "label": "Consideră-l o greșeală obișnuită"
+            }
+          ]
+        },
+        {
+          "label": "Sensibil la majuscule (Case sensitive)",
+          "description": "Dacă este activat, utilizarea literelor mari/mici diferită de soluție este considerată o eroare."
+        },
+        {
+          "label": "Verifică automat răspunsurile după introducere"
+        },
+        {
+          "label": "Activează butonul \"Arată soluțiile\""
+        },
+        {
+          "label": "Solicită completarea tuturor câmpurilor înainte ca soluția să poată fi vizualizată"
+        },
+        {
+          "label": "Activează butonul \"Reîncearcă\""
+        },
+        {
+          "label": "Activează butonul \"Verifică\""
+        },
+        {
+          "label": "Afișează dialog de confirmare la \"Verifică\""
+        },
+        {
+          "label": "Afișează dialog de confirmare la \"Reîncearcă\""
+        }
+      ]
+    },
+    {
+      "label": "Text pentru butonul \"Arată soluțiile\"",
+      "default": "Arată soluția"
+    },
+    {
+      "label": "Text pentru butonul \"Reîncearcă\"",
+      "default": "Reîncearcă"
+    },
+    {
+      "label": "Text pentru butonul \"Verifică\"",
+      "default": "Verifică"
+    },
+    {
+      "label": "Text pentru butonul \"Trimite\"",
+      "default": "Trimite"
+    },
+    {
+      "label": "Text pentru mesajul \"Nu este completat\"",
+      "default": "Vă rugăm să completați toate spațiile goale pentru a vizualiza soluția"
+    },
+    {
+      "label": "Etichetă pentru pictograma de indiciu",
+      "default": "Indiciu"
+    },
+    {
+      "label": "Avertisment pentru greșeli de ortografie",
+      "description": "Acesta este mesajul afișat utilizatorilor când fac o greșeală de ortografie. Inserați @mistake pentru a le arăta ce au greșit.",
+      "default": "Verificați ortografia: @mistake"
+    },
+    {
+      "label": "Dialog de confirmare la verificare",
+      "fields": [
+        {
+          "label": "Text antet",
+          "default": "Finalizezi?"
+        },
+        {
+          "label": "Text corp",
+          "default": "Sunteți sigur că doriți să finalizați?"
+        },
+        {
+          "label": "Etichetă buton Anulare",
+          "default": "Anulează"
+        },
+        {
+          "label": "Etichetă buton Confirmare",
+          "default": "Finalizează"
+        }
+      ]
+    },
+    {
+      "label": "Dialog de confirmare la reîncercare",
+      "fields": [
+        {
+          "label": "Text antet",
+          "default": "Reîncerci?"
+        },
+        {
+          "label": "Text corp",
+          "default": "Sunteți sigur că doriți să reîncercați?"
+        },
+        {
+          "label": "Etichetă buton Anulare",
+          "default": "Anulează"
+        },
+        {
+          "label": "Etichetă buton Confirmare",
+          "default": "Confirmă"
+        }
+      ]
+    },
+    {
+      "label": "Reprezentarea textuală a barei de scor pentru cei care folosesc un cititor de ecran",
+      "default": "Ați obținut :num din :total puncte"
+    }
+  ]
+}
