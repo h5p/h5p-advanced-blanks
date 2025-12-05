@@ -9,7 +9,7 @@ import { Cloze } from "../models/cloze";
  */
 export class ClozeLoader {
   private static normalizedBlankMarker = '___';
-  
+
   /**
    * @param  {string} html - The html string that contains the cloze with blanks marking and highlight markings.
    * @param  {Blank[]} blanks - All blanks as entered by the content author.
@@ -57,7 +57,7 @@ export class ClozeLoader {
     var highlightCounter = 0;
     let blankCounter = 0;
 
-    // Searches the html string for highlights and blanks and inserts spans. 
+    // Searches the html string for highlights and blanks and inserts spans.
     do {
       var nextHighlightMatch = html.match(exclamationMarkRegExp);
       var nextBlankIndex = html.indexOf(ClozeLoader.normalizedBlankMarker);
@@ -95,7 +95,7 @@ export class ClozeLoader {
   }
 
   /**
-   * Looks for all instances of marked blanks and replaces them with ___. 
+   * Looks for all instances of marked blanks and replaces them with ___.
    * @param  {string} html
    * @returns string
    */
@@ -107,9 +107,9 @@ export class ClozeLoader {
 
    /**
    * Iterates through all blanks and calls their linkHighlightIdsToObjects(...).
-   * @param orderedAllElementsList 
-   * @param highlightInstances 
-   * @param blanksInstances 
+   * @param orderedAllElementsList
+   * @param highlightInstances
+   * @param blanksInstances
    */
   private static linkHighlightsObjects(orderedAllElementsList: ClozeElement[], highlightInstances: Highlight[], blanksInstances: Blank[]): void {
     for (var blank of blanksInstances) {
