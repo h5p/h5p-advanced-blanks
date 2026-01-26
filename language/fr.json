@@ -56,7 +56,7 @@
                       "label": "Texte de la réponse incorrecte"
                     },
                     {
-                      "label": "Feedback",
+                      "label": "Retour",
                       "description": "Le feedback doit aider l'utilisateur à trouver la bonne réponse et être le plus possible adapté à la réponse qu'il a donnée."
                     },
                     {
@@ -228,8 +228,8 @@
       "default": "Vérifier"
     },
     {
-      "label": "Text for \"Submit\" button",
-      "default": "Submit"
+      "label": "Texte pour le bouton \"Envoyer\"",
+      "default": "Envoyer"
     },
     {
       "label": "Texte pour le message \"Tout n'est pas complété\"",
