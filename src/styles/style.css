@@ -28,11 +28,13 @@
 }
 
 .h5p-advanced-blanks .blank .h5p-text-input {
-    font-family: H5PDroidSans, sans-serif;
-    font-size: 1em;
-    border-radius: 0.25em;
-    border: 1px solid #a0a0a0;
-    padding: 0.1875em 1.5em 0.1875em 0.5em;
+    font-family: var(--h5p-theme-font-name, H5PDroidSans, sans-serif);
+    font-size: var(--h5p-theme-font-size-m, 1em);
+    border-radius: var(--h5p-theme-border-radius-medium, 0.25em);
+    background-color: var(--h5p-theme-ui-base, #ffffff);
+    border: 2px solid var(--h5p-theme-alternative-darker, #a0a0a0);
+    padding: calc(var(--h5p-theme-spacing-xs, 0.375em) / 2) 1.5em calc(var(--h5p-theme-spacing-xs, 0.375em) / 2) var(--h5p-theme-spacing-xxs, 0.5em);
+    color: var(--h5p-theme-text-primary, inherit);
     text-overflow: ellipsis;
     overflow: hidden;
 }
@@ -78,8 +80,8 @@ select.h5p-text-input {
 
 .h5p-advanced-blanks .blank .h5p-text-input:focus {
     outline: none;
-    box-shadow: 0 0 0.5em 0 #7fb8ff;
-    border-color: #7fb8ff;
+    box-shadow: 0 0 0.5em 0 var(--h5p-theme-contrast-cta-white, #7fb8ff);
+    border-color: var(--h5p-theme-contrast-cta-white, #7fb8ff);
 }
 
 
@@ -298,4 +300,12 @@ select.h5p-text-input {
     13% {
         transform: translate3d(2px, 0, 0);
     }
+}
+
+.h5p-advanced-blanks .hidden-but-read {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
 }
