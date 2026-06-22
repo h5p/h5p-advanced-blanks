@@ -3,14 +3,14 @@
   "description": "Fill the blanks exercise with individual feedback",
   "majorVersion": 1,
   "minorVersion": 2,
-  "patchVersion": 7,
+  "patchVersion": 8,
   "runnable": 1,
   "author": "S. Rettig",
   "license": "MIT",
   "machineName": "H5P.AdvancedBlanks",
   "coreApi": {
     "majorVersion": 1,
-    "minorVersion": 6
+    "minorVersion": 28
   },
   "embedTypes": [
     "iframe"
@@ -32,7 +32,7 @@
     {
       "machineName": "H5P.Question",
       "majorVersion": 1,
-      "minorVersion": 4
+      "minorVersion": 5
     },
     {
       "machineName": "H5P.JoubelUI",
