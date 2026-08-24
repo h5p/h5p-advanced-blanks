@@ -33,12 +33,12 @@
     "css-loader": "^6.7.1",
     "diff": "^5.1.0",
     "html-loader": "^4.2.0",
-    "postcss": "^8.4.31",
+    "postcss": "^8.5.10",
     "postcss-loader": "^7.2.4",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.4.2",
     "typescript": "^5.0.4",
-    "webpack": "^5.94.0",
+    "webpack": "^5.107.2",
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
