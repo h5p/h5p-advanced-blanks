@@ -20,7 +20,7 @@ const XAPI_ALTERNATIVE_EXTENSION = 'https://h5p.org/x-api/alternatives';
 const XAPI_CASE_SENSITIVITY = 'https://h5p.org/x-api/case-sensitivity';
 const XAPI_REPORTING_VERSION_EXTENSION = 'https://h5p.org/x-api/h5p-reporting-version';
 
-export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
+export default class AdvancedBlanks extends (H5P.Question as { new(type?: string, options?: { theme?: boolean }): any; }) {
 
   private clozeController: ClozeController;
   private repository: IDataRepository;
@@ -38,6 +38,7 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
    * Indicates if user has entered any answer so far.
    */
   private answered: boolean = false;
+  private a11yHeader: HTMLDivElement;
 
   /**
    * @constructor
@@ -47,7 +48,7 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
    * @param {object} contentData
    */
   constructor(config: any, contentId: string, contentData: any = {}) {
-    super();
+    super('advanced-blanks', { theme: true });
 
     // Set mandatory default values for editor widgets that create content type instances
     config = extend({
@@ -59,6 +60,10 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
         selectAlternatives: 'alternatives'
       },
       submitAnswer: 'Submit',
+      a11yCheck: 'Check the answers. The responses will be marked as correct, incorrect, or unanswered.',
+      a11yShowSolution: 'Show the solution. The task will be marked with its correct solution.',
+      a11yRetry: 'Retry the task. Reset all responses and start the task over again.',
+      a11yCheckingModeHeader: 'Checking mode',
     }, config);
 
     this.jQuery = H5P.jQuery;
@@ -95,6 +100,7 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
       return ($container) => {
         original($container);
         this.clozeController.initialize(this.container.get(0), $container);
+        this.setupA11yHeader();
         if (this.clozeController.deserializeCloze(this.previousState)) {
           this.answered = this.clozeController.isFilledOut;
           if (this.settings.autoCheck)
@@ -156,6 +162,13 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
     this.moveToState(States.ongoing);
   }
 
+  private setupA11yHeader() {
+    this.a11yHeader = document.createElement('div');
+    this.a11yHeader.classList.add('hidden-but-read');
+    this.a11yHeader.tabIndex = -1;
+    this.container.get(0).insertBefore(this.a11yHeader, this.container.get(0).firstChild);
+  }
+
   /**
    * @returns JQuery - The outer h5p container. The library can add dialogues to this
    * element.
@@ -190,7 +203,9 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
       if (media.params.file) {
         this.setImage(media.params.file.path, {
           disableImageZooming: this.settings.disableImageZooming,
-          alt: media.params.alt
+          alt: media.params.alt,
+          expandImage: media.params.expandImage,
+          minimizeImage: media.params.minimizeImage
         });
       }
     }
@@ -208,7 +223,9 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
     if (!this.settings.autoCheck) {
       // Check answer button
       this.addButton('check-answer', this.localization.getTextFromLabel(LocalizationLabels.checkAllButton),
-        this.onCheckAnswer, true, {}, {
+        this.onCheckAnswer, true, {
+        'aria-label': this.localization.getTextFromLabel(LocalizationLabels.a11yCheck),
+      }, {
         confirmationDialog: {
           enable: this.settings.confirmCheckDialog,
           l10n: this.localization.getObjectForStructure(LocalizationStructures.confirmCheck),
@@ -217,28 +234,43 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
         },
         contentData: this.contentData,
         textIfSubmitting: this.localization.getTextFromLabel(LocalizationLabels.submitAllButton),
+        icon: 'check',
       });
     }
 
     // Show solution button
     this.addButton('show-solution', this.localization.getTextFromLabel(LocalizationLabels.showSolutionButton),
-      this.onShowSolution, this.settings.enableSolutionsButton);
+      this.onShowSolution, this.settings.enableSolutionsButton, {
+      'aria-label': this.localization.getTextFromLabel(LocalizationLabels.a11yShowSolution),
+    }, {
+      styleType: 'secondary',
+      icon: 'show-solutions',
+    });
 
     // Try again button
     if (this.settings.enableRetry === true) {
       this.addButton('try-again', this.localization.getTextFromLabel(LocalizationLabels.retryButton),
-        this.onRetry, true, {}, {
+        this.onRetry, true, {
+        'aria-label': this.localization.getTextFromLabel(LocalizationLabels.a11yRetry),
+      }, {
         confirmationDialog: {
           enable: this.settings.confirmRetryDialog,
           l10n: this.localization.getObjectForStructure(LocalizationStructures.confirmRetry),
           instance: this,
           $parentElement: $container
-        }
+        },
+        styleType: 'secondary',
+        icon: 'retry',
       });
     }
   }
 
   private onCheckAnswer = () => {
+    if (this.a11yHeader) {
+      this.a11yHeader.innerHTML = this.localization.getTextFromLabel(LocalizationLabels.a11yCheckingModeHeader);
+      this.a11yHeader.focus();
+    }
+
     this.clozeController.checkAll();
 
     this.triggerXAPI('interacted');
@@ -266,6 +298,10 @@ export default class AdvancedBlanks extends (H5P.Question as { new(): any; }) {
   }
 
   private onRetry = () => {
+    if (this.a11yHeader) {
+      this.a11yHeader.innerHTML = '';
+    }
+
     this.removeFeedback();
     this.clozeController.reset();
     this.answered = false;

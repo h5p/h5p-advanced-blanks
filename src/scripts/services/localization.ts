@@ -6,7 +6,11 @@
   notFilledOutWarning = "notFilledOut",
   tipButton ="tipLabel",
   typoMessage = "spellingMistakeWarning",
-  scoreBarLabel = "scoreBarLabel"
+  scoreBarLabel = "scoreBarLabel",
+  a11yCheck = "a11yCheck",
+  a11yShowSolution = "a11yShowSolution",
+  a11yRetry = "a11yRetry",
+  a11yCheckingModeHeader = "a11yCheckingModeHeader"
 }
 
 export enum LocalizationStructures {

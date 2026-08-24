@@ -61,7 +61,7 @@ export class H5PSettings implements ISettings {
     this.showSolutionsRequiresInput = h5pConfigData.behaviour.showSolutionsRequiresInput;
     this.confirmCheckDialog = h5pConfigData.behaviour.confirmCheckDialog;
     this.confirmRetryDialog = h5pConfigData.behaviour.confirmRetryDialog;
-    this.disableImageZooming = h5pConfigData.media.disableImageZooming;
+    this.disableImageZooming = h5pConfigData.media?.disableImageZooming ?? false;
 
     this.enforceLogic();
   }
